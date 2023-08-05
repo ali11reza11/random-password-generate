@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>random password generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+     integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
+     crossorigin="anonymous"
+     referrerpolicy="no-referrer" />
+     <style>
+        body{
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+            align-items: center;
+            margin: 0;
+
+        }
+        .password-container{
+            background-color: palevioletred;
+            width: 500px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px;
+            margin: 10px;
+        }
+        .input-container{
+            border: solid 2px;
+            padding: 10px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .input{
+            border: none;
+            background-color: transparent;
+            outline: none;
+            font-size: 20px;
+            letter-spacing: 4px;
+        }
+        .input ::placeholder{
+            letter-spacing: 0px;
+        }
+        .fa-copy{
+            cursor: pointer;
+      
+        }
+        .fa-copy:hover{
+            opacity: .2;
+        }
+        .btn{
+            background-color: black;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin: 10px 0;
+            font-size: 20px;
+        }
+        .btn:hover{
+            background-color: green;
+
+        }
+        .btn:active{
+            transform: scale(0.95);
+        }
+        .alert-container{
+            position: fixed;
+            width: 300px;
+            height: 50px;
+            background-color: lightpink;
+            right: -400px;
+            bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px ;
+            display: flex ;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            transition: 0.3s;
+        }
+        .active.alert-container{
+            right: 20px;
+        }
+     </style>
+</head>
+<body>
+    <div class="password-container">
+        <h2>random password generator</h2>
+        <div class="input-container">
+            <input type="text" id="input" class="input"
+            placeholder="create password">
+            <i class="far fa-copy"></i>
+
+        </div>
+        <button class="btn">generate</button>
+    </div>
+    <div class="alert-container ">password copied !!!</div>
+    <script>
+
+
+          let copyalert = document.querySelector(".alert-container");
+        let button = document.querySelector(`.btn`);
+        let input = document.querySelector(`.input`);
+        button.addEventListener(`click`,createrandompass);
+        function createrandompass(){
+            let char = "1234567890qwertyuiopasdfghjklzxcvbnm,/;'[]=-";
+            let passlength = 10;
+            let password = ``;
+            for (let index = 0; index < passlength; index++) {
+                let randomnum = Math.floor(Math.random() * char.length);
+                password += char.substring(randomnum,randomnum + 1);
+                }
+                input.value = password;
+        }
+
+        let copyicon = document.querySelector(".fa-copy");
+        copyicon.addEventListener(`click`,copy);
+        function copy (){
+            input.setSelectionRange(0 , 9999);
+            navigator.clipboard.writeText(input.value);
+
+           
+            copyalert.classList.add("active")
+            setTimeout(() => {
+                copyalert.classList.remove("active")
+            }, 1000);
+
+        }
+
+
+
+
+
+
+    </script>
+</body>
+</html>
